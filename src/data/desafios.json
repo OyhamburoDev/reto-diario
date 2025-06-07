@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1",
+    "tipo": "foto",
+    "descripcion": "Sacá una foto de algo azul"
+  },
+  {
+    "id": "2",
+    "tipo": "ubicacion",
+    "descripcion": "Mostranos dónde estás ahora mismo"
+  },
+  {
+    "id": "3",
+    "tipo": "texto",
+    "descripcion": "Escribí algo bueno que te pasó hoy"
+  },
+  {
+    "id": "4",
+    "tipo": "foto",
+    "descripcion": "Sacá una foto de tu comida favorita"
+  },
+  {
+    "id": "5",
+    "tipo": "texto",
+    "descripcion": "Escribí un objetivo para esta semana"
+  }
+]
