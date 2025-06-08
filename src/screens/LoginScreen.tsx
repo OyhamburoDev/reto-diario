@@ -5,29 +5,35 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { AuthStackParamList } from "../navigation/authTypes";
 import { auth } from "../firebase/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../store/userSlice";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!email || !password) {
       Alert.alert("Todos los campos son obligatorios");
       return;
     }
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log("Signed in!");
-        const user = userCredential.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log("user", user);
+      dispatch(loginUser({ email: user.email, uid: user.uid }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

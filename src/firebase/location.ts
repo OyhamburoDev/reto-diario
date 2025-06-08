@@ -2,8 +2,12 @@ import { ref, push, set, get } from "firebase/database";
 import { db } from "./firebaseConfig";
 
 // Guardar ubicación
-export const saveLocation = async (address: string, descripcion: string) => {
-  const locationsRef = ref(db, "Locations/");
+export const saveLocation = async (
+  uid: string | null,
+  address: string,
+  descripcion: string
+) => {
+  const locationsRef = ref(db, `Locations/${uid}`);
   const newLocationRef = push(locationsRef);
 
   await set(newLocationRef, {
@@ -15,8 +19,10 @@ export const saveLocation = async (address: string, descripcion: string) => {
 };
 
 // Traer ubicaciones
-export const getLocations = async () => {
-  const locRef = ref(db, "Locations/");
+export const getLocations = async (uid: string | null) => {
+  if (!uid) return [];
+
+  const locRef = ref(db, `Locations/${uid}`);
   const snapshot = await get(locRef);
 
   if (!snapshot.exists()) return [];

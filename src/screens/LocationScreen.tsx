@@ -8,6 +8,8 @@ import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../navigation/types";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useRoute, RouteProp } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store";
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Location">;
 
@@ -18,6 +20,7 @@ export default function LocationScreen() {
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RouteProp<RootStackParamList, "Location">>();
   const { descripcion } = route.params;
+  const uid = useSelector((state: RootState) => state.user.uid);
 
   useEffect(() => {
     (async () => {
@@ -47,7 +50,7 @@ export default function LocationScreen() {
     setModalVisible(false);
 
     if (address) {
-      await saveLocation(address, descripcion);
+      await saveLocation(uid, address, descripcion);
     }
 
     setShowCheck(true);

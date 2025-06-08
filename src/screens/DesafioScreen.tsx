@@ -18,17 +18,11 @@ export default function DesafioScreen() {
 
       {desafio.tipo === "texto" && (
         <>
-          <TextInput
-            style={styles.input}
-            placeholder="Escribí tu respuesta"
-            placeholderTextColor="#999"
-            multiline
-          />
           <Pressable
             style={styles.button}
-            onPress={() => console.log("Texto enviado")}
+            onPress={() => navigation.navigate("Notes")}
           >
-            <Text style={styles.buttonText}>Enviar respuesta</Text>
+            <Text style={styles.buttonText}>Escribir texto</Text>
           </Pressable>
         </>
       )}

@@ -7,6 +7,7 @@ import CamaraScreen from "../screens/CamaraScreen";
 import LocationScreen from "../screens/LocationScreen";
 import { RootStackParamList } from "./types";
 import EditarPerfilScreen from "../screens/EditarPerfilScreen";
+import NotesScreen from "../screens/NotesScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -31,6 +32,7 @@ export default function AppNavigator() {
       <Stack.Screen name="Desafio" component={DesafioScreen} />
       <Stack.Screen name="Camara" component={CamaraScreen} />
       <Stack.Screen name="Location" component={LocationScreen} />
+      <Stack.Screen name="Notes" component={NotesScreen} />
       <Stack.Screen name="EditarPerfil" component={EditarPerfilScreen} />
     </Stack.Navigator>
   );

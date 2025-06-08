@@ -12,10 +12,13 @@ import { Ionicons } from "@expo/vector-icons";
 import { getFotos } from "../firebase/photos";
 import { getLocations } from "../firebase/location";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store";
 
 const screenWidth = Dimensions.get("window").width;
 
 export default function HistoryScreen() {
+  const uid = useSelector((state: RootState) => state.user.uid);
   const [desafios, setDesafios] = useState<
     {
       id: string;
@@ -28,8 +31,8 @@ export default function HistoryScreen() {
   useEffect(() => {
     const fetchDesafios = async () => {
       try {
-        const fotos = await getFotos();
-        const ubicaciones = await getLocations();
+        const fotos = await getFotos(uid);
+        const ubicaciones = await getLocations(uid);
 
         const todos = [...fotos, ...ubicaciones];
 
@@ -43,7 +46,7 @@ export default function HistoryScreen() {
     };
 
     fetchDesafios();
-  }, []);
+  }, [uid]);
 
   const getCardStyle = (tipo: string) => {
     switch (tipo) {

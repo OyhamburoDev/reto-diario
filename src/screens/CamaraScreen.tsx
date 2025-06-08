@@ -7,6 +7,8 @@ import { useNavigation } from "@react-navigation/native";
 import { savePhoto } from "../firebase/photos";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../navigation/types";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store";
 
 export default function CamaraScreen() {
   const [uri, setUri] = useState<string | null>(null);
@@ -16,6 +18,7 @@ export default function CamaraScreen() {
   const navigation = useNavigation<any>();
   const route = useRoute<RouteProp<RootStackParamList, "Camara">>();
   const { descripcion } = route.params;
+  const uid = useSelector((state: RootState) => state.user.uid);
 
   useEffect(() => {
     (async () => {
@@ -47,7 +50,7 @@ export default function CamaraScreen() {
     setModalVisible(false);
 
     if (base) {
-      await savePhoto(base, descripcion);
+      await savePhoto(uid, base, descripcion);
     }
 
     setShowCheck(true);

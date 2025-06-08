@@ -2,8 +2,12 @@ import { ref, push, set, get } from "firebase/database";
 import { db } from "./firebaseConfig";
 
 // Guardar una foto
-export const savePhoto = async (base: string, descripcion: string) => {
-  const photosRef = ref(db, "fotos/");
+export const savePhoto = async (
+  uid: string | null,
+  base: string,
+  descripcion: string
+) => {
+  const photosRef = ref(db, `fotos/${uid}`);
   const newPhotoRef = push(photosRef);
 
   await set(newPhotoRef, {
@@ -15,8 +19,8 @@ export const savePhoto = async (base: string, descripcion: string) => {
 };
 
 // Traer todas las fotos
-export const getFotos = async () => {
-  const fotosRef = ref(db, "fotos/");
+export const getFotos = async (uid: string | null) => {
+  const fotosRef = ref(db, `fotos/${uid}`);
   const snapshot = await get(fotosRef);
 
   if (!snapshot.exists()) return [];

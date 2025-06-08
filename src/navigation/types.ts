@@ -6,5 +6,6 @@ export type RootStackParamList = {
   Desafio: { desafio: Desafio };
   Camara: { descripcion: string };
   Location: { descripcion: string };
+  Notes: undefined;
   EditarPerfil: undefined;
 };
