@@ -1,7 +1,9 @@
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+// import { getAuth } from "firebase/auth";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyCGJw9i9fjzT9Z_tSwMP7qcVPbJiTW2Y-s",
   authDomain: "reto-diario-51f26.firebaseapp.com",
   databaseURL: "https://reto-diario-51f26-default-rtdb.firebaseio.com",
@@ -12,4 +14,5 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
 export const db = getDatabase(app);
