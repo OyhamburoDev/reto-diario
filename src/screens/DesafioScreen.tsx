@@ -20,7 +20,11 @@ export default function DesafioScreen() {
         <>
           <Pressable
             style={styles.button}
-            onPress={() => navigation.navigate("Notes")}
+            onPress={() =>
+              navigation.navigate("Notes", {
+                descripcion: desafio.descripcion,
+              })
+            }
           >
             <Text style={styles.buttonText}>Escribir texto</Text>
           </Pressable>

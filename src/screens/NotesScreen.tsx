@@ -2,20 +2,54 @@ import { Text, View, TextInput, StyleSheet, Pressable } from "react-native";
 import { useState } from "react";
 import Modal from "react-native-modal";
 import { Ionicons } from "@expo/vector-icons";
+import { saveText } from "../firebase/notes";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store";
+import { useRoute, RouteProp } from "@react-navigation/native";
+import { RootStackParamList } from "../navigation/types";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Notes">;
 
 export default function NotesScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [showCheck, setShowCheck] = useState(false);
+  const [text, setText] = useState("");
+  const navigation = useNavigation<NavigationProp>();
+  const uid = useSelector((state: RootState) => state.user.uid);
+  const route = useRoute<RouteProp<RootStackParamList, "Notes">>();
+  const { descripcion } = route.params;
+
+  const handleSendText = () => {
+    setModalVisible(true);
+  };
+
+  const handleText = async () => {
+    setModalVisible(false);
+    if (text) {
+      await saveText(uid, text, descripcion);
+    }
+    setShowCheck(true);
+
+    setTimeout(() => {
+      setShowCheck(false);
+      setText("");
+      navigation.navigate("Tabs", { screen: "Inicio" });
+    }, 1500);
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
         placeholder="Escribí tu respuesta"
         placeholderTextColor="#999"
-        multiline
+        value={text}
+        onChangeText={setText}
       />
 
-      <Pressable style={styles.button} onPress={() => console.log("hola")}>
+      <Pressable style={styles.button} onPress={handleSendText}>
         <Text style={styles.buttonText}>Enviar nota</Text>
       </Pressable>
 
@@ -30,7 +64,7 @@ export default function NotesScreen() {
             ¿Seguro que querés enviar esta ubicación?
           </Text>
           <View style={styles.modalButtons}>
-            <Pressable style={styles.btn} onPress={() => console.log("hola")}>
+            <Pressable style={styles.btn} onPress={handleText}>
               <Text style={styles.btnText}>Sí</Text>
             </Pressable>
             <Pressable

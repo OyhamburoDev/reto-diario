@@ -8,10 +8,11 @@ import {
   Platform,
   StatusBar,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { getFotos } from "../firebase/photos";
 import { getLocations } from "../firebase/location";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { getText } from "../firebase/notes";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store";
 
@@ -33,8 +34,9 @@ export default function HistoryScreen() {
       try {
         const fotos = await getFotos(uid);
         const ubicaciones = await getLocations(uid);
+        const textos = await getText(uid);
 
-        const todos = [...fotos, ...ubicaciones];
+        const todos = [...fotos, ...ubicaciones, ...textos];
 
         todos.sort(
           (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
