@@ -31,6 +31,7 @@ export const getLocations = async (uid: string | null) => {
 
   return Object.entries(data).map(([id, obj]: any) => ({
     id,
+    address: obj.address,
     descripcion: obj.descripcion,
     date: obj.date,
     tipo: obj.tipo ?? "ubicacion",

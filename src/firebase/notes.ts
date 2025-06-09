@@ -31,6 +31,7 @@ export const getText = async (uid: string | null) => {
 
   return Object.entries(data).map(([id, obj]: any) => ({
     id,
+    text: obj.text,
     descripcion: obj.descripcion,
     date: obj.date,
     tipo: obj.tipo ?? "texto",

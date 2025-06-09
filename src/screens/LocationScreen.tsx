@@ -38,7 +38,7 @@ export default function LocationScreen() {
       longitude: location.coords.longitude,
     });
 
-    const texrAddress = `${addr.street}, ${addr.district}, ${addr.city}, ${addr.region}, ${addr.country}`;
+    const texrAddress = `${addr.street}, ${addr.streetNumber}, ${addr.city}, ${addr.region}, ${addr.country}`;
     setAddress(texrAddress);
   };
 

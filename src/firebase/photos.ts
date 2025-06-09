@@ -29,6 +29,7 @@ export const getFotos = async (uid: string | null) => {
 
   return Object.entries(data).map(([id, obj]: any) => ({
     id,
+    base: obj.base,
     descripcion: obj.descripcion,
     date: obj.date,
     tipo: obj.tipo ?? "foto",
