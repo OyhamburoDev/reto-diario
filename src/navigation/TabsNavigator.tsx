@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
+import GradientIcon from "../components/GradientIcon";
 
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
@@ -14,26 +14,30 @@ export default function TabsNavigator() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarStyle: {
-          backgroundColor: "#fce4ec", // fondo rosa claro
-          borderTopColor: "#f78fb3",
-          height: 70,
+          backgroundColor: "#0d0d0d",
+          borderTopColor: "transparent",
+          elevation: 0,
+          borderTopWidth: 0,
+          height: 80,
+          paddingTop: 5,
         },
         tabBarLabelStyle: {
-          fontSize: 12,
-          fontWeight: "bold",
-          marginBottom: 6,
+          fontSize: 13,
+          fontWeight: "600",
+          marginBottom: 10,
+          marginTop: 2,
         },
-        tabBarActiveTintColor: "#d6336c", // rosa fuerte
-        tabBarInactiveTintColor: "#999",
-        tabBarIcon: ({ color, size }) => {
-          let iconName: any;
+        tabBarActiveTintColor: "#00BFFF",
+        tabBarInactiveTintColor: "#777777", // todos del mismo color
+        tabBarIcon: ({ size }) => {
+          let iconName: "home" | "person" | "time" | "settings" = "home";
 
           if (route.name === "Inicio") iconName = "home";
           else if (route.name === "Perfil") iconName = "person";
           else if (route.name === "Historial") iconName = "time";
           else if (route.name === "Configuración") iconName = "settings";
 
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <GradientIcon name={iconName} size={30} />;
         },
         headerShown: false,
       })}

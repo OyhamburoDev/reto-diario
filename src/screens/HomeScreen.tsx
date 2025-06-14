@@ -5,6 +5,8 @@ import { Desafio } from "../types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/types";
+import { colors } from "../theme/theme";
+import CardDesafio from "../components/CardDesafio";
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Inicio">;
 
@@ -32,27 +34,18 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>💖 Desafío del día 💑</Text>
-      <Text style={styles.descripcion}>{desafio.descripcion}</Text>
-
-      <View style={styles.cntButton}>
-        <Pressable
-          style={({ pressed }) => [styles.button, pressed && { opacity: 0.8 }]}
-          onPress={() => navigation.navigate("Desafio", { desafio })}
-        >
-          <Text style={styles.buttonText}>¡Quiero hacerlo!</Text>
-        </Pressable>
-
-        <Pressable
-          style={({ pressed }) => [
-            styles.buttonAlt,
-            pressed && { opacity: 0.8 },
-          ]}
-          onPress={changeDesafio}
-        >
-          <Text style={styles.buttonText}>Cambiar desafío</Text>
-        </Pressable>
+      <Text style={styles.titulo}>Retto</Text>
+      <View style={styles.cntSubtitle}>
+        <Text style={styles.desafioText}>Desafío del día </Text>
+        <Text style={styles.rachasText}>🔥 Racha: 3 días </Text>
       </View>
+
+      <CardDesafio
+        descripcion={desafio.descripcion}
+        tipo={desafio.tipo}
+        onPress={() => navigation.navigate("Desafio", { desafio })}
+        onCambiar={changeDesafio}
+      />
     </View>
   );
 }
@@ -63,12 +56,30 @@ const styles = StyleSheet.create({
     padding: 24,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#ffeef2",
+    backgroundColor: colors.background,
   },
   titulo: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "#d6336c",
+    color: colors.primary,
+    fontFamily: "Poppins_700Bold",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  cntSubtitle: {
+    flexDirection: "row",
+    gap: 15,
+  },
+  desafioText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: colors.text,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  rachasText: {
+    fontSize: 20,
+    color: colors.text,
     marginBottom: 20,
     textAlign: "center",
   },
