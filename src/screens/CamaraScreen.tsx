@@ -9,6 +9,7 @@ import { useRoute, RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../navigation/types";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store";
+import { colors } from "../theme/theme";
 
 export default function CamaraScreen() {
   const [uri, setUri] = useState<string | null>(null);
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     padding: 24,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#ffeef2", // fondo romántico
+    backgroundColor: colors.background,
   },
   icon: {
     marginBottom: 12,

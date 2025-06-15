@@ -9,6 +9,7 @@ import { useRoute, RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { colors } from "../theme/theme";
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Notes">;
 
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 24,
-    backgroundColor: "#ffeef2",
+    backgroundColor: colors.background,
   },
 
   input: {

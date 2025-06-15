@@ -1,5 +1,13 @@
 import React from "react";
-import { Text, View, StyleSheet, Pressable, Image, Button } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Pressable,
+  Image,
+  Button,
+  ImageBackground,
+} from "react-native";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store";
@@ -9,6 +17,8 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/types";
 import { getUserData } from "../firebase/profile";
 import type { PerfilUsuario } from "../screens/EditarPerfilScreen";
+import { colors } from "../theme/theme";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function HeaderProfile() {
   const uid = useSelector((state: RootState) => state.user.uid);
@@ -34,87 +44,93 @@ export default function HeaderProfile() {
 
   return (
     <View style={styles.profileHeader}>
-      {/* <View style={styles.profilePicPlaceholder}>
-        <Text style={styles.profileInitials}>👤</Text>
-      </View> */}
-
-      <View style={styles.avatarContainer}>
-        <Image
-          source={
-            profile.base
-              ? { uri: `data:image/jpeg;base64,${profile.base}` }
-              : require("../../assets/images/avatar-placeholder.jpg")
-          }
-          style={styles.avatarImage}
-        />
-      </View>
-
-      <Text style={styles.profileName}>{profile.name}</Text>
-      <Text style={styles.profileBio}>{profile.biografia}</Text>
-      <Pressable
-        onPress={() => navigation.navigate("EditarPerfil")}
-        style={{
-          alignSelf: "center",
-          backgroundColor: "#f78fb3",
-          paddingVertical: 8,
-          paddingHorizontal: 16,
-          borderRadius: 12,
-          marginBottom: 20,
-        }}
+      <ImageBackground
+        source={require("../../assets/images/fondo-profile-user.jpg")}
+        resizeMode="cover"
+        style={styles.cardTop}
+        imageStyle={{ borderRadius: 20 }}
       >
-        <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }}>
-          Editar perfil
-        </Text>
-      </Pressable>
+        {/* Botón de configuración arriba a la derecha */}
+        <Pressable
+          style={styles.settingsButton}
+          onPress={() => navigation.navigate("EditarPerfil")}
+        >
+          <Ionicons name="settings-outline" size={20} color="#fff" />
+        </Pressable>
+
+        {/* Foto de perfil */}
+        <View style={styles.avatarContainer}>
+          <Image
+            source={
+              profile.base
+                ? { uri: `data:image/jpeg;base64,${profile.base}` }
+                : require("../../assets/images/avatar-placeholder.jpg")
+            }
+            style={styles.avatarImage}
+          />
+        </View>
+
+        {/* Nombre y bio */}
+        <View style={styles.nameBio}>
+          <Text style={styles.profileName}>{profile.name}</Text>
+          <Text style={styles.profileBio}>{profile.biografia}</Text>
+        </View>
+      </ImageBackground>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   profileHeader: {
-    alignItems: "center",
-    marginBottom: 10,
-    paddingVertical: 20,
-    backgroundColor: "#ffeef2",
-    borderRadius: 16,
-  },
-  profilePicPlaceholder: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: "#f8d7da",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  profileInitials: {
-    fontSize: 28,
-    color: "#d6336c",
-  },
-
-  avatarContainer: {
-    width: 100,
-    height: 100,
-    alignSelf: "center",
     marginBottom: 20,
   },
-
+  cardTop: {
+    position: "relative",
+    alignItems: "center",
+    backgroundColor: colors.card,
+    borderRadius: 20,
+    paddingVertical: 24,
+    paddingHorizontal: 16,
+    borderWidth: 0.5,
+    borderColor: "rgba(0, 191, 255, 0.34)",
+    shadowColor: colors.primary,
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 10,
+  },
+  settingsButton: {
+    position: "absolute",
+    top: 12,
+    right: 12,
+    backgroundColor: colors.primary,
+    borderRadius: 20,
+    padding: 8,
+    zIndex: 10,
+  },
+  avatarContainer: {
+    marginBottom: 10,
+  },
   avatarImage: {
     width: 100,
     height: 100,
     borderRadius: 50,
     backgroundColor: "#ccc",
   },
+  nameBio: {
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 10,
+  },
   profileName: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#333",
+    fontSize: 18,
+    fontFamily: "Poppins_700Bold",
+    color: colors.text,
   },
   profileBio: {
-    fontSize: 14,
-    color: "#666",
+    fontSize: 13,
+    fontFamily: "Poppins_400Regular",
+    color: colors.text,
     textAlign: "center",
-    marginTop: 6,
-    paddingHorizontal: 10,
+    lineHeight: 18,
   },
 });

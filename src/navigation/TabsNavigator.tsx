@@ -18,8 +18,7 @@ export default function TabsNavigator() {
           borderTopColor: "transparent",
           elevation: 0,
           borderTopWidth: 0,
-          height: 80,
-          paddingTop: 5,
+          height: 70,
         },
         tabBarLabelStyle: {
           fontSize: 10,

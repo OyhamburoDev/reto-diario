@@ -10,6 +10,7 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store";
+import { colors } from "../theme/theme";
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Location">;
 
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
     padding: 24,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#ffeef2",
+    backgroundColor: colors.background,
   },
   text: {
     fontSize: 18,
