@@ -22,8 +22,8 @@ export default function TabsNavigator() {
           paddingTop: 5,
         },
         tabBarLabelStyle: {
-          fontSize: 13,
-          fontWeight: "600",
+          fontSize: 10,
+          fontFamily: "Poppins_600SemiBold",
           marginBottom: 10,
           marginTop: 2,
         },
@@ -37,7 +37,7 @@ export default function TabsNavigator() {
           else if (route.name === "Historial") iconName = "time";
           else if (route.name === "Configuración") iconName = "settings";
 
-          return <GradientIcon name={iconName} size={30} />;
+          return <GradientIcon name={iconName} size={25} />;
         },
         headerShown: false,
       })}

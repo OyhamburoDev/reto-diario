@@ -1,4 +1,6 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { getRandomDesafio } from "../utils/getRandomDesafio";
 import { useEffect, useState } from "react";
 import { Desafio } from "../types";
@@ -7,6 +9,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/types";
 import { colors } from "../theme/theme";
 import CardDesafio from "../components/CardDesafio";
+import LogrosCarousel from "../components/LogrosCarousel";
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Inicio">;
 
@@ -33,20 +36,24 @@ export default function HomeScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Retto</Text>
-      <View style={styles.cntSubtitle}>
-        <Text style={styles.desafioText}>Desafío del día </Text>
-        <Text style={styles.rachasText}>🔥 Racha: 3 días </Text>
-      </View>
+    <SafeAreaView edges={["top"]} style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Text style={styles.titulo}>Retto</Text>
+        <View style={styles.cntSubtitle}>
+          <Text style={styles.desafioText}>Desafío del día </Text>
+          <Text style={styles.rachasText}>🔥 Racha: 3 días </Text>
+        </View>
 
-      <CardDesafio
-        descripcion={desafio.descripcion}
-        tipo={desafio.tipo}
-        onPress={() => navigation.navigate("Desafio", { desafio })}
-        onCambiar={changeDesafio}
-      />
-    </View>
+        <CardDesafio
+          descripcion={desafio.descripcion}
+          tipo={desafio.tipo}
+          onPress={() => navigation.navigate("Desafio", { desafio })}
+          onCambiar={changeDesafio}
+        />
+
+        <LogrosCarousel />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -54,31 +61,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: colors.background,
   },
+  scrollContainer: {
+    alignItems: "center",
+  },
   titulo: {
     fontSize: 28,
-    fontWeight: "bold",
+    marginTop: 8,
     color: colors.primary,
     fontFamily: "Poppins_700Bold",
     marginBottom: 20,
     textAlign: "center",
+    textShadowColor: "#00BFFF",
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 8,
   },
   cntSubtitle: {
     flexDirection: "row",
+    alignItems: "center",
     gap: 15,
+    marginBottom: 20,
   },
   desafioText: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 17,
+    fontFamily: "Poppins_600SemiBold",
     color: colors.text,
     marginBottom: 20,
     textAlign: "center",
   },
   rachasText: {
-    fontSize: 20,
+    fontSize: 17,
+    fontFamily: "Poppins_600SemiBold",
     color: colors.text,
     marginBottom: 20,
     textAlign: "center",

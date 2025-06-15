@@ -6,8 +6,9 @@ import {
   ImageBackground,
 } from "react-native";
 import { colors } from "../theme/theme";
-import { Ionicons } from "@expo/vector-icons"; // O el ícono que uses
+import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { BlurView } from "expo-blur";
 
 type Props = {
   descripcion: string;
@@ -40,6 +41,7 @@ export default function CardDesafio({
   return (
     <View style={styles.card}>
       {/* Fondo superior con imagen */}
+
       <ImageBackground
         source={require("../../assets/images/fondo-card.jpg")}
         resizeMode="cover"
@@ -48,14 +50,14 @@ export default function CardDesafio({
       >
         <Ionicons
           name={getIconName(tipo)}
-          size={60}
+          size={80}
           color={colors.primary}
           style={styles.icon}
         />
       </ImageBackground>
 
       {/* Parte inferior */}
-      <View style={styles.cardBottom}>
+      <BlurView intensity={50} tint="dark" style={styles.cardBottom}>
         <Text style={styles.texto}>{descripcion}</Text>
 
         <Pressable onPress={onPress}>
@@ -72,7 +74,7 @@ export default function CardDesafio({
         <Pressable onPress={onCambiar}>
           <Text style={styles.botonCambiar}>Cambiar</Text>
         </Pressable>
-      </View>
+      </BlurView>
     </View>
   );
 }
@@ -83,29 +85,34 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
     marginBottom: 30,
-    backgroundColor: colors.card,
     shadowColor: colors.primary,
     shadowOpacity: 0.3,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 10,
+    borderWidth: 0.5,
+    borderColor: "rgba(0, 191, 255, 0.34)", // o "#00BFFF"
   },
   cardTop: {
     width: "100%",
-    height: 130,
+    height: 150,
     justifyContent: "center",
     alignItems: "center",
   },
   cardBottom: {
+    paddingTop: 15,
     padding: 20,
     alignItems: "center",
-    backgroundColor: colors.card,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    overflow: "hidden",
   },
   icon: {
     marginBottom: 0,
   },
   texto: {
     color: colors.text,
-    fontSize: 19,
+    fontSize: 16,
+    fontFamily: "Poppins_400Regular",
     textAlign: "center",
     marginBottom: 20,
   },
@@ -124,7 +131,7 @@ const styles = StyleSheet.create({
   },
   botonTexto: {
     color: colors.text,
-    fontWeight: "bold",
+    fontFamily: "Poppins_700Bold",
     fontSize: 16,
   },
   botonCambiar: {
@@ -132,5 +139,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 10,
     textDecorationLine: "underline",
+    fontFamily: "Poppins_400Regular",
   },
 });

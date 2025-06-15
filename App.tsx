@@ -11,6 +11,8 @@ import { store } from "./src/store";
 import AuthNavigator from "./src/navigation/AuthNavigator";
 import AppNavigator from "./src/navigation/AppNavigator";
 import { RootState } from "./src/store";
+import { StatusBar } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 function MainNavigator() {
   const user = useSelector((state: RootState) => state.user);
@@ -33,7 +35,14 @@ export default function App() {
   }
   return (
     <Provider store={store}>
-      <MainNavigator />
+      <SafeAreaProvider>
+        <StatusBar
+          translucent={false}
+          backgroundColor="#000"
+          barStyle="light-content"
+        />
+        <MainNavigator />
+      </SafeAreaProvider>
     </Provider>
   );
 }

@@ -4,6 +4,7 @@ import PhotosProfile from "../components/PhotosProfile";
 import LocationProfile from "../components/LocationProfile";
 import NotesProfile from "../components/NotesProfile";
 import HeaderProfile from "../components/HeaderProfile";
+import { colors } from "../theme/theme";
 
 export default function ProfileScreen() {
   return (
@@ -27,7 +28,7 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff0f5",
+    backgroundColor: colors.background,
     padding: 16,
   },
 });

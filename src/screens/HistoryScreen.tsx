@@ -15,6 +15,7 @@ import { getLocations } from "../firebase/location";
 import { getText } from "../firebase/notes";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store";
+import { colors } from "../theme/theme";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -98,7 +99,7 @@ export default function HistoryScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: colors.background,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   timelineContainer: {
