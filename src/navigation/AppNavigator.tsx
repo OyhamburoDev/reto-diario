@@ -8,6 +8,7 @@ import LocationScreen from "../screens/LocationScreen";
 import { RootStackParamList } from "./types";
 import EditarPerfilScreen from "../screens/EditarPerfilScreen";
 import NotesScreen from "../screens/NotesScreen";
+import { colors } from "../theme/theme";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -16,7 +17,7 @@ export default function AppNavigator() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#f78fb3", // rosa pastel
+          backgroundColor: colors.background,
         },
         headerTintColor: "#fff",
         headerTitleStyle: {
