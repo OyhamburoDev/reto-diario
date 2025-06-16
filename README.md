@@ -1,5 +1,9 @@
 # RetoDiario 📱🚀
 
+![Mockup de RetoDiario](./assets/images/image1.jpeg)
+
+<!-- Cambiá esta ruta por la correcta si usás otra carpeta o un enlace externo -->
+
 Una aplicación móvil desarrollada en **React Native** con **TypeScript**, orientada a fomentar hábitos saludables, lúdicos y personalizados. Cada día se presenta un desafío distinto que el usuario debe completar, ya sea con una **foto**, una **nota**, una **ubicación** o (en el futuro) un **audio**. Ideal para parejas, desafíos personales o juegos creativos.
 
 ---
@@ -47,12 +51,6 @@ La app cuenta con una estructura de **Bottom Tab Navigator** + **Stack Navigator
 
 ---
 
-## 🖼 Mockup de la app
-
-[ ¡Insertar imagen del mockup aquí! ]
-
----
-
 ## 💡 Ideas futuras
 
 - Agregar retos con audio 🎤
@@ -63,3 +61,5 @@ La app cuenta con una estructura de **Bottom Tab Navigator** + **Stack Navigator
 - Exportación del historial en PDF
 
 ---
+
+## 📁 Estructura de carpetas
